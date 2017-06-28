@@ -1,5 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request
-from werkzeug import security
+from flask import Flask, render_template, redirect, url_for, session, request, flash
 from os import urandom
 import logic
 
@@ -14,18 +13,30 @@ def index():
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
     if request.method == "POST":
-        if logic.check_credentials(request.form["username"], request.form["password"]):
-            logic.save_credentials()
-            session["username"] = request.form["username"]
-            return redirect(url_for("index"))
+        usrn = request.form["username"]
+        pw = request.form["password"]
+        if logic.check_credentials(usrn, pw):
+            if logic.check_username(usrn):
+                logic.save_credentials(usrn, pw)
+                session["username"] = request.form["username"]
+                return redirect(url_for("index"))
+            flash("This username is already in use!", "error")
+            return redirect(url_for("registration"))
+        flash("Your password must be at least 5 characters long!", "error")
+        return redirect(url_for("registration"))
     return render_template("registration.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        session["username"] = request.form.get("username")
-        return redirect(url_for("index"))
+        usrn = request.form["username"]
+        pw = request.form["password"]
+        if logic.check_login(usrn, pw):
+            session["username"] = request.form.get("username")
+            return redirect(url_for("index"))
+        flash("Invalid credentials", "error")
+        return redirect(url_for("login"))
     return render_template("login.html")
 
 

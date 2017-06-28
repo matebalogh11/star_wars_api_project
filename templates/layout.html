@@ -14,17 +14,25 @@
         {% block title %}{% endblock %}
     </head>
     <body>
-        <div class="page-header">
-            <h5 class="col-sm-1 text-left"><a class="btn-link" href="{{url_for('index')}}">Planet List</a></h5>
-            {% if session.username %}
-                <h5 class="col-sm-1 text-left">Voting Status</h5>
-                <h5 class="col-sm-1 text-left"><a class="btn-link" href="{{url_for('logout')}}">Logout</a></h5>
-                <h5 class="col-sm-8 text-right">{{session.username}}</h5> 
-            {% else %}
-                <h5 class="col-sm-1 text-left"><a class="btn-link" href="{{url_for('registration')}}">Registration</a></h5>
-                <h5 class="col-sm-1 text-left"><a class="btn-link" href="{{url_for('login')}}">Login</a></h5>
-            {% endif %}
-        </div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{url_for('index')}}">Planet List</a></li>
+                    <li><a href="#">Voting Status</a></li>
+                    {% if not session.username %}
+                    <li><a  href="{{url_for('registration')}}">Registration</a></li>
+                    {% endif %}   
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if session.username %}
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{session.username}}</a></li>
+                    <li><a  href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    {% else %}
+                    <li><a  href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
         <!--Modal-->
         <div class="container">
             <div class="modal fade" id="myModal" role="dialog">
@@ -46,6 +54,16 @@
                     </div>
                 </div>
             </div>
+            <!--Flash messages-->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
             {% block body %}{% endblock %}
         </div> 
     </body>
