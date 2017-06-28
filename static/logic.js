@@ -48,7 +48,7 @@ app.logic = {
         });
     },
     closeModal: function() {
-        $("#modalCloser").click(function() {
+        $("#modalCloser, #modalCloser2").click(function() {
             $("#modalHeader, .modalRow").remove();
         });
     }
