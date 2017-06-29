@@ -33,3 +33,15 @@ def check_login(username, password):
             return True
         return False
     return False
+
+
+def save_votes(pdata, username):
+    planet = pdata["planet"]
+    planet_id = pdata["id"]
+    sql = """SELECT id FROM users WHERE username = %s;"""
+    data = (username,)
+    user_id = db.excute_sql(sql, data, method="one")
+    sql1 = """INSERT INTO planetVotes (planet_id, planet_name, user_id)
+              VALUES (%s, %s, %s);"""
+    data1 = (planet_id, planet, user_id)
+    db.excute_sql(sql1, data1)

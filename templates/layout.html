@@ -25,7 +25,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if session.username %}
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{session.username}}</a></li>
+                    <li class="loggedIn"><a href="#"><span class="glyphicon glyphicon-user"></span> {{session.username}}</a></li>
                     <li><a  href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                     {% else %}
                     <li><a  href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -57,11 +57,12 @@
             <!--Flash messages-->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
-                    <ul class="flashes">
                         {% for category, message in messages %}
-                        <li class="{{ category }}">{{ message }}</li>
+                        <div class="alert">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            {{ message }}
+                        </div>
                         {% endfor %}
-                    </ul>
                 {% endif %}
             {% endwith %}
             {% block body %}{% endblock %}

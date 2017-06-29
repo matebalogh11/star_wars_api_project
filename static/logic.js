@@ -51,6 +51,25 @@ app.logic = {
         $("#modalCloser, #modalCloser2").click(function() {
             $("#modalHeader, .modalRow").remove();
         });
+    },
+    planetVotes: function() {
+        $(".planetBody").on("click", ".voteBtn", function() {
+            var obj = {
+                planet: $(this).data("planet"),
+                id: $(this).data("id")
+            }
+            myJSON = JSON.stringify(obj)
+            $.ajax({
+                url: "http://127.0.0.1:5000/votes",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json",
+                data: myJSON,
+                success: function(response) {
+                    alert(response["stage"]);
+                }
+            });
+        });
     }
 }
 

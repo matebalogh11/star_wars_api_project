@@ -23,7 +23,7 @@ app.data = {
 
             var planetAttr = [response.results[j].name, diameterT, response.results[j].climate,
                               response.results[j].terrain, response.results[j].surface_water, thousandS,
-                              response.results[j].residents.length]
+                              response.results[j].residents.length, "Vote"]
             $(".planetBody").append(`<tr class="trInBody"  id=${strNum}></tr>`);
 
             for(var i = 0; i < planetAttr.length; i++) {
@@ -45,6 +45,13 @@ app.data = {
                     } else {
                         $("#" + strNum).append(`<td>No known<br>residents</td>`);
                     }    
+                } else if(i === 7) {
+                    var check = $(".loggedIn").text()
+                    if(check) {
+                        var idArray = response.results[j].url.split("/");
+                        var id = Number(idArray[idArray.length - 2]);
+                        $("#" + strNum).append(`<td><button class="voteBtn btn" data-planet=${planetAttr[0]} data-id=${id}>${planetAttr[i]}</button></td>`);
+                    }
                 } else {
                     $("#" + strNum).append(`<td>${planetAttr[i]}</td>`);
                 }

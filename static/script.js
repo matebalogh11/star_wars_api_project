@@ -11,6 +11,7 @@ app.init = function() {
     app.logic.checkButton();
     app.logic.modalButt();
     app.logic.closeModal();
+    app.logic.planetVotes();
 }
 
 app.init()
