@@ -7,8 +7,8 @@ app.data = {
             dataType: "json",
             url: apiURL,
             success: function(response) {
-                app.data.commonData.response = response;
-                app.data.createPlanetTable(response);
+                app.data.commonData.response = JSON.parse(response.body);
+                app.data.createPlanetTable(JSON.parse(response.body));
             }
         });
     },
@@ -67,6 +67,6 @@ app.data = {
     },
     commonData: {
         response: null,
-        apiURL: "https://crossorigin.me/http://swapi.co/api/planets"
+        apiURL: "http://cors-proxy.htmldriven.com/?url=http://swapi.co/api/planets"
     }
 }
