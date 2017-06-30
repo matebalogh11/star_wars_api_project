@@ -67,6 +67,6 @@ app.data = {
     },
     commonData: {
         response: null,
-        apiURL: "https://swapi.co/api/planets"
+        apiURL: "https://crossorigin.me/http://swapi.co/api/planets"
     }
 }
