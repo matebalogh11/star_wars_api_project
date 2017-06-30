@@ -80,6 +80,7 @@ app.logic = {
                 dataType: "json",
                 contentType: "application/json",
                 success: function(response) {
+                    console.log(response);
                     $(".modal-title").html("Planet voting statistics");
                     $("#modalHead").append(`<tr class="modalHead"></tr>`);
                     for(let i = 0; i < response.length; i++) {

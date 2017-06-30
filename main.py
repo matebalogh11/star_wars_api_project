@@ -1,10 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, session, request, flash, jsonify, send_from_directory
-from flask_sslify import SSLify
 from os import urandom, path
 import logic
 
 app = Flask(__name__)
-sslify = SSLify(app)
 app.secret_key = urandom(13)
 
 
