@@ -3,6 +3,7 @@ from os import urandom, path
 import logic
 
 app = Flask(__name__)
+app.secret_key = urandom(13)
 
 
 @app.route("/")
@@ -66,5 +67,4 @@ def send_gritter_files(filename):
     return send_from_directory("images", filename)
 
 if __name__ == "__main__":
-    app.secret_key = urandom(13)
     app.run()
