@@ -58,18 +58,14 @@ app.logic = {
                 planet: $(this).data("planet"),
                 id: $(this).data("id")
             }
-            myJSON = JSON.stringify(obj);
             $.ajax({
                 url: "http://127.0.0.1:5000/votes",
-                contentType: "application/json",
-                data: myJSON,
+                method: "POST",
+                data: obj,
                 success: function(response) {
                     $.gritter.add({
                         title: "You voted successfully on " + obj.planet
                     });
-                },
-                error: function(error){
-                    console.log(error);
                 }
             });
         });

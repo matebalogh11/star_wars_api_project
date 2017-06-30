@@ -1,6 +1,7 @@
 from werkzeug import security
 from datetime import datetime
 import db
+from flask import request
 
 
 def save_credentials(username, password):
@@ -36,9 +37,9 @@ def check_login(username, password):
     return False
 
 
-def save_votes(pdata, username):
-    planet = pdata["planet"]
-    planet_id = pdata["id"]
+def save_votes(username):
+    planet = request.form.get("planet")
+    planet_id = request.form.get("id")
     sql = """SELECT id FROM users WHERE username = %s;"""
     data = (username,)
     user_id = db.excute_sql(sql, data, method="one")

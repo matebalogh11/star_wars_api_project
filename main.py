@@ -49,10 +49,9 @@ def logout():
 
 @app.route("/votes", methods=["POST"])
 def votes():
-    data = request.get_json(silent=True)
     success = '{"stage": "success"}'
     username = session["username"]
-    logic.save_votes(data, username)
+    logic.save_votes(username)
     return success
 
 
