@@ -60,8 +60,10 @@ app.logic = {
             }
             $.ajax({
                 url: "http://127.0.0.1:5000/votes",
-                method: "POST",
-                data: obj,
+                type: "post",
+                dataType: "json",
+                contentType: "application/json",
+                data: myJSON,
                 success: function(response) {
                     $.gritter.add({
                         title: "You voted successfully on " + obj.planet
