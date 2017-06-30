@@ -67,4 +67,4 @@ def send_gritter_files(filename):
     return send_from_directory("images", filename)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
