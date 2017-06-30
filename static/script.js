@@ -2,7 +2,6 @@ var app = app || {};
 
 $(document).ready(function(){
     console.log("ready!");
-    // $('#myModal').modal('toggle');
 });
 
 app.init = function() {
