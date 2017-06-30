@@ -77,8 +77,10 @@ app.logic = {
         $(".voteStat").click(function() {
             $.ajax({
                 url:"http://127.0.0.1:5000/votestat",
-                dataType: "json",
+                dataType: "jsonp",
                 contentType: "application/json",
+                headers: {'Access-Control-Allow-Origin': '*'},
+                crossDomain: true,
                 success: function(response) {
                     console.log(response);
                     $(".modal-title").html("Planet voting statistics");
