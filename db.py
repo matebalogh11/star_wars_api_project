@@ -15,7 +15,7 @@ def excute_sql(query, data=None, method=None):
     try:
         urllib.parse.uses_netloc.append('postgres')
         url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
-        connection = psycopg2.connect(
+        conn = psycopg2.connect(
             database=url.path[1:],
             user=url.username,
             password=url.password,
