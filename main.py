@@ -1,5 +1,5 @@
-from flask import Flask, render_template, redirect, url_for, session, request, flash, jsonify
-from os import urandom
+from flask import Flask, render_template, redirect, url_for, session, request, flash, jsonify, send_from_directory
+from os import urandom, path
 import logic
 
 app = Flask(__name__)
@@ -46,14 +46,24 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route("/votes", methods=["POST", "GET"])
+@app.route("/votes", methods=["POST"])
 def votes():
     data = request.get_json(silent=True)
+    success = '{"stage": "success"}'
     username = session["username"]
     logic.save_votes(data, username)
-    success = '{"stage": "success"}'
-    fail = '{"stage": "fail"}'
-    return success if data else fail
+    return success
+
+
+@app.route("/votestat")
+def votestat():
+    stats = jsonify(logic.fetch_statistics())
+    return stats
+
+
+@app.route("/images/<path:filename>")
+def send_gritter_files(filename):
+    return send_from_directory("images", filename)
 
 
 def main():

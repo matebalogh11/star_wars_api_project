@@ -49,7 +49,7 @@ app.logic = {
     },
     closeModal: function() {
         $("#modalCloser, #modalCloser2").click(function() {
-            $("#modalHeader, .modalRow").remove();
+            $("#modalHeader, .modalRow, .modalHead, .modalVote").remove();
         });
     },
     planetVotes: function() {
@@ -58,7 +58,7 @@ app.logic = {
                 planet: $(this).data("planet"),
                 id: $(this).data("id")
             }
-            myJSON = JSON.stringify(obj)
+            myJSON = JSON.stringify(obj);
             $.ajax({
                 url: "http://127.0.0.1:5000/votes",
                 type: "post",
@@ -66,9 +66,31 @@ app.logic = {
                 contentType: "application/json",
                 data: myJSON,
                 success: function(response) {
-                    alert(response["stage"]);
+                    $.gritter.add({
+                        title: "You voted successfully on " + obj.planet
+                    });
                 }
             });
+        });
+    },
+    showVoteStat: function() {
+        $(".voteStat").click(function() {
+            $.ajax({
+                url:"http://127.0.0.1:5000/votestat",
+                dataType: "json",
+                contentType: "application/json",
+                success: function(response) {
+                    $(".modal-title").html("Planet voting statistics");
+                    $("#modalHead").append(`<tr class="modalHead"></tr>`);
+                    for(let i = 0; i < response.length; i++) {
+                        $(".modalHead").append(`<th>${response[i][0]}</th>`);
+                    }
+                    $("#modalBody").append(`<tr class="modalVote"></tr>`);
+                    for(let i = 0; i < response.length; i++) {
+                        $(".modalVote").append(`<td>${response[i][1]}</td>`);
+                    }
+                }
+            })
         });
     }
 }

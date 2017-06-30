@@ -9,7 +9,9 @@
         <script src="{{ url_for('static', filename='data.js') }}" defer></script>
         <script src="{{ url_for('static', filename='logic.js') }}" defer></script>
         <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='jquery.gritter.js') }}" defer></script>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='jquery.gritter.css') }}" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         {% block title %}{% endblock %}
     </head>
@@ -18,7 +20,7 @@
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{url_for('index')}}">Planet List</a></li>
-                    <li><a href="#">Voting Status</a></li>
+                    <li><a class="voteStat" href="#" data-toggle="modal" data-target="#myModal">Voting Status</a></li>
                     {% if not session.username %}
                     <li><a  href="{{url_for('registration')}}">Registration</a></li>
                     {% endif %}   

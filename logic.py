@@ -1,4 +1,5 @@
 from werkzeug import security
+from datetime import datetime
 import db
 
 
@@ -41,7 +42,21 @@ def save_votes(pdata, username):
     sql = """SELECT id FROM users WHERE username = %s;"""
     data = (username,)
     user_id = db.excute_sql(sql, data, method="one")
-    sql1 = """INSERT INTO planetVotes (planet_id, planet_name, user_id)
-              VALUES (%s, %s, %s);"""
-    data1 = (planet_id, planet, user_id)
+    time = create_timestamp()
+    sql1 = """INSERT INTO planetVotes (planet_id, planet_name, user_id, submission_time)
+              VALUES (%s, %s, %s, %s);"""
+    data1 = (planet_id, planet, user_id, time)
     db.excute_sql(sql1, data1)
+
+
+def create_timestamp():
+    timestamp = '{:%Y-%m-%d %H:%M:%S}'.format(datetime.now())
+    return timestamp
+
+
+def fetch_statistics():
+    sql = """SELECT planet_name, COUNT(id) as Votes FROM planetvotes
+             GROUP BY planet_name ORDER BY COUNT(id) DESC;"""
+    stats = db.excute_sql(sql, method="all")
+    print(stats)
+    return stats

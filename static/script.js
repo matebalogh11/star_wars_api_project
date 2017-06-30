@@ -12,6 +12,7 @@ app.init = function() {
     app.logic.modalButt();
     app.logic.closeModal();
     app.logic.planetVotes();
+    app.logic.showVoteStat();
 }
 
 app.init()
