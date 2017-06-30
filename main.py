@@ -65,6 +65,6 @@ def votestat():
 def send_gritter_files(filename):
     return send_from_directory("images", filename)
 
-
-app.secret_key = urandom(13)
-app.run()
+if __name__ == "__main__":
+    app.secret_key = urandom(13)
+    app.run()
