@@ -58,8 +58,8 @@ def votes():
 
 @app.route("/votestat")
 def votestat():
-    stats = jsonify(logic.fetch_statistics())
-    return stats
+    stats = logic.fetch_statistics()
+    return jsonify(stats)
 
 
 @app.route("/images/<path:filename>")
@@ -67,4 +67,4 @@ def send_gritter_files(filename):
     return send_from_directory("images", filename)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

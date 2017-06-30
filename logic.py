@@ -58,5 +58,4 @@ def fetch_statistics():
     sql = """SELECT planet_name, COUNT(id) as Votes FROM planetvotes
              GROUP BY planet_name ORDER BY COUNT(id) DESC;"""
     stats = db.excute_sql(sql, method="all")
-    print(stats)
     return stats

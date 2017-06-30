@@ -61,14 +61,15 @@ app.logic = {
             myJSON = JSON.stringify(obj);
             $.ajax({
                 url: "http://127.0.0.1:5000/votes",
-                type: "post",
-                dataType: "json",
                 contentType: "application/json",
                 data: myJSON,
                 success: function(response) {
                     $.gritter.add({
                         title: "You voted successfully on " + obj.planet
                     });
+                },
+                error: function(error){
+                    console.log(error);
                 }
             });
         });
@@ -77,10 +78,8 @@ app.logic = {
         $(".voteStat").click(function() {
             $.ajax({
                 url:"http://127.0.0.1:5000/votestat",
-                dataType: "jsonp",
+                dataType: "json",
                 contentType: "application/json",
-                headers: {'Access-Control-Allow-Origin': '*'},
-                crossDomain: true,
                 success: function(response) {
                     console.log(response);
                     $(".modal-title").html("Planet voting statistics");
