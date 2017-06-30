@@ -1,17 +1,27 @@
 import psycopg2
+import urllib
+import os
 
 
-DB = "swapi"
-HOST = "localhost"
-USER = "bmate11"
-PW = "3dc41885"
-DNS = "dbname='{}' user='{}' host='{}' password='{}'".format(DB, USER, HOST, PW)
+# DB = "swapi"
+# HOST = "localhost"
+# USER = "bmate11"
+# PW = "3dc41885"
+# DNS = "dbname='{}' user='{}' host='{}' password='{}'".format(DB, USER, HOST, PW)
 
 
 def excute_sql(query, data=None, method=None):
     conn = None
     try:
-        conn = psycopg2.connect(DNS)
+        urllib.parse.uses_netloc.append('postgres')
+        url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+        connection = psycopg2.connect(
+            database=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
     except psycopg2.OperationalError as error:
         print("Uh oh.. something went wrong!")
         print(error)
