@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, session, request, flash, jsonify, send_from_directory
-from os import urandom, path
+from os import urandom
 import logic
 
 app = Flask(__name__)
