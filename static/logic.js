@@ -60,6 +60,7 @@ app.logic = {
                 planet: $(this).data("planet"),
                 id: $(this).data("id")
             }
+            
             myJSON = JSON.stringify(obj);
             $.ajax({
                 url: "/votes",
