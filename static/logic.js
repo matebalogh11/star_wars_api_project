@@ -60,8 +60,9 @@ app.logic = {
                 planet: $(this).data("planet"),
                 id: $(this).data("id")
             }
+            myJSON = JSON.stringify(obj);
             $.ajax({
-                url: "https://127.0.0.1:5000/votes",
+                url: "/votes",
                 type: "post",
                 dataType: "json",
                 contentType: "application/json",
@@ -77,11 +78,9 @@ app.logic = {
     showVoteStat: function() {
         $(".voteStat").click(function() {
             $.ajax({
-                url:"https://127.0.0.1:5000/votestat",
+                url:"/votestat",
                 dataType: "json",
-                contentType: "application/json",
                 success: function(response) {
-                    console.log(response);
                     $(".modal-title").html("Planet voting statistics");
                     $("#modalHead").append(`<tr class="modalHead"></tr>`);
                     for(let i = 0; i < response.length; i++) {
