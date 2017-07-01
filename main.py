@@ -1,9 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, session, request, flash, jsonify, send_from_directory
-from os import urandom, path
 import logic
 
 app = Flask(__name__)
-app.secret_key = urandom(13)
+app.secret_key = "A0Zr98j/3yX R~XHH!"
 
 
 @app.route("/")
@@ -67,6 +66,3 @@ def votestat():
 @app.route("/images/<path:filename>")
 def send_gritter_files(filename):
     return send_from_directory("images", filename)
-
-if __name__ == "__main__":
-    app.run()
