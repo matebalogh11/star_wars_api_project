@@ -7,16 +7,11 @@ app.data = {
             dataType: "json",
             url: apiURL,
             success: function(response) {
-                $.getJSON('https://api.github.com/repos/atom/atom', function(response){
-                console.log(response['stargazers_count'])
-                });
-                $.getJSON('http://api.github.com/repos/atom/atom', function(response){
-                    console.log(response['stargazers_count'])
-                });
                 app.data.commonData.response = response;
                 app.data.createPlanetTable(response);
             }
         });
+        return false
     },
     addThousandSeparator : function(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

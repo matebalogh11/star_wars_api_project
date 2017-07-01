@@ -20,6 +20,7 @@ app.logic = {
         } else {
             $(this).prop("disabled", true);
         }
+        return false
         });
     },
     modalButt: function() {
