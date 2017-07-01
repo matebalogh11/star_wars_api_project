@@ -34,6 +34,7 @@ app.logic = {
                 $("#modalHeader").append(`<th>${header[j]}</th>`)
             }
             for(let i = 0; i < residents.length; i++) {
+                residents[i] = residents[i].replace("http", "https");
                 $.ajax({
                     dataType: "json",
                     url: residents[i],
