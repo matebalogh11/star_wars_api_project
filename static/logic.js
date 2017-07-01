@@ -68,6 +68,7 @@ app.logic = {
                 contentType: "application/json",
                 data: myJSON,
                 success: function(response) {
+                    console.log(response.stage)
                     $.gritter.add({
                         title: "You voted successfully on " + obj.planet
                     });
