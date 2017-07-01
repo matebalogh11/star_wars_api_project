@@ -7,8 +7,10 @@ app.logic = {
         $("#p, #n").prop("disabled", false);
         if(name === "next") {
             var direction = app.data.commonData.response.next;
+            direction = direction.replace("http", "https");
         } else {
             var direction = app.data.commonData.response.previous;
+            direction = direction.replace("http", "https");
         }
 
         if(direction != null) {
@@ -59,7 +61,7 @@ app.logic = {
                 id: $(this).data("id")
             }
             $.ajax({
-                url: "http://127.0.0.1:5000/votes",
+                url: "https://127.0.0.1:5000/votes",
                 type: "post",
                 dataType: "json",
                 contentType: "application/json",
@@ -75,7 +77,7 @@ app.logic = {
     showVoteStat: function() {
         $(".voteStat").click(function() {
             $.ajax({
-                url:"http://127.0.0.1:5000/votestat",
+                url:"https://127.0.0.1:5000/votestat",
                 dataType: "json",
                 contentType: "application/json",
                 success: function(response) {

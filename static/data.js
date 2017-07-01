@@ -67,6 +67,6 @@ app.data = {
     },
     commonData: {
         response: null,
-        apiURL: "http://swapi.co/api/planets"
+        apiURL: "https://swapi.co/api/planets"
     }
 }

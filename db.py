@@ -3,13 +3,6 @@ import urllib
 import os
 
 
-# DB = "swapi"
-# HOST = "localhost"
-# USER = "bmate11"
-# PW = "3dc41885"
-# DNS = "dbname='{}' user='{}' host='{}' password='{}'".format(DB, USER, HOST, PW)
-
-
 def excute_sql(query, data=None, method=None):
     conn = None
     try:
