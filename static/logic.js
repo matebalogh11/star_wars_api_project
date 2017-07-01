@@ -57,14 +57,13 @@ app.logic = {
     planetVotes: function() {
         $(".planetBody").on("click", ".voteBtn", function() {
             var obj = {
-                planet: $(this).data("planet"),
-                id: $(this).data("id")
+                planet: "Hoth",
+                id: "4"
             }
-            
             myJSON = JSON.stringify(obj);
             $.ajax({
                 url: "/votes",
-                type: "post",
+                method: "post",
                 dataType: "json",
                 contentType: "application/json",
                 data: myJSON,
