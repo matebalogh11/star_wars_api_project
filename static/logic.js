@@ -2,6 +2,7 @@ app = app || {};
 
 app.logic = {
     checkButton: function() {
+        // Check the next/prev value from the planet data and load accordingly.
         $("#p, #n").click(function() {
         var name = $(this).data("name");
         $("#p, #n").prop("disabled", false);
@@ -21,6 +22,7 @@ app.logic = {
         });
     },
     modalButt: function() {
+        // Call the modal from the layout and fill it with data.
         $(".planetBody").on("click", ".activator", function() {
             var index = $(this).data("planet");
             var residents = app.data.commonData.response.results[index].residents;
@@ -53,6 +55,7 @@ app.logic = {
         });
     },
     planetVotes: function() {
+        // Through an ajax post request send data to the server.
         $(".planetBody").on("click", ".voteBtn", function() {
             var obj = {
                 planet: $(this).data("planet"),
@@ -74,6 +77,7 @@ app.logic = {
         });
     },
     showVoteStat: function() {
+        // Call a modal from layout and fill it with votestat data.
         $(".voteStat").click(function() {
             $.ajax({
                 url:"http://127.0.0.1:5000/votestat",

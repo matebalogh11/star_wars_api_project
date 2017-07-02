@@ -12,6 +12,7 @@ def index():
 
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
+    """Validate the submitted form then save the credentials in the database."""
     if request.method == "POST":
         usrn = request.form["username"]
         pw = request.form["password"]
@@ -29,6 +30,7 @@ def registration():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """Check the credentials in the db then initialise a session."""
     if request.method == "POST":
         usrn = request.form["username"]
         pw = request.form["password"]
@@ -42,12 +44,14 @@ def login():
 
 @app.route("/logout")
 def logout():
+    """Kill the session when the user logs out."""
     session.pop("username", None)
     return redirect(url_for("index"))
 
 
 @app.route("/votes", methods=["POST"])
 def votes():
+    """Save the ajax request in the db if the user votes."""
     data = request.get_json(silent=True)
     success = '{"stage": "success"}'
     username = session["username"]
@@ -57,12 +61,14 @@ def votes():
 
 @app.route("/votestat")
 def votestat():
+    """Return vote stats from db."""
     stats = jsonify(logic.fetch_statistics())
     return stats
 
 
 @app.route("/images/<path:filename>")
 def send_gritter_files(filename):
+    """Serve the requested dir/files to gritter."""
     return send_from_directory("images", filename)
 
 if __name__ == "__main__":

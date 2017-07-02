@@ -3,6 +3,7 @@ var app = app || {};
 
 app.data = {
     fetchPlanetData: function(apiURL) {
+        // Through api request fetch the planet data.
         $.ajax({
             dataType: "json",
             url: apiURL,
@@ -12,10 +13,11 @@ app.data = {
             }
         });
     },
-    addThousandSeparator : function(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    addThousandSeparator : function(string) {
+        return string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     createPlanetTable: function(response) {
+        // Build the table containing the planet data.
         for(var j = 0; j < response.results.length; j++) {
             var strNum = j.toString();
             var diameterT = app.data.addThousandSeparator(response.results[j].diameter + " km");
@@ -59,6 +61,7 @@ app.data = {
         }
     },
     createPlanetHeader: function() {
+        // Create a header for the planet table.
         var header = ["Name", "Diameter", "Climate", "Terrain", "Surface Water Percentage", "Population", "Residents"];
         $(".planetHead").append(`<tr  id="header"></tr>`);
         for(let h = 0; h < header.length; h++) {

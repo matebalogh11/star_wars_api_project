@@ -13,7 +13,7 @@ def save_credentials(username, password):
 
 def check_credentials(username, password):
     if username and password:
-        return True if len(password) > 5 else False
+        return True if len(password) > 4 else False
     return False
 
 
